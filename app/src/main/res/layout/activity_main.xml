@@ -115,8 +115,8 @@
 
             <ImageView
                 android:id="@+id/emailbutton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginEnd="30dp"
                 android:background="@drawable/circlebackground"
                 android:elevation="1dp"
@@ -125,18 +125,17 @@
 
             <ImageView
                 android:id="@+id/google"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="@drawable/circlebackground"
                 android:elevation="1dp"
                 android:padding="8dp"
-                android:src="@drawable/baseline_phone_24" />
+                android:src="@drawable/googlelogo" />
 
         </LinearLayout>
 
 
     </RelativeLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -145,7 +144,15 @@
         android:gravity="center"
         android:padding="8dp">
 
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sendOtp"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/teal_800"
