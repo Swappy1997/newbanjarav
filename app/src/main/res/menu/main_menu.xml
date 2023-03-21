@@ -2,38 +2,42 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/dashboard"
-            android:title="Dashboard" />
-<!--        <item-->
-<!--            android:id="@+id/Like"-->
-<!--            android:icon="@drawable/ic_baseline_thumb_up_24"-->
-<!--            android:title="@string/like" />-->
-<!--        <item-->
-<!--            android:id="@+id/watchlist"-->
-<!--            android:icon="@drawable/ic_baseline_watch_later_24"-->
-<!--            android:title="@string/Watch" />-->
-<!--        <item-->
-<!--            android:id="@+id/setting"-->
-<!--            android:icon="@drawable/ic_baseline_settings_24"-->
-<!--            android:title="@string/setting" />-->
+            android:id="@+id/lang"
+            android:icon="@drawable/baseline_language_24"
+            android:title="Language" />
+        <item
+            android:id="@+id/passcode"
+            android:icon="@drawable/baseline_key_24"
+            android:title="@string/touch" />
+        <!--        <item-->
+        <!--            android:id="@+id/watchlist"-->
+        <!--            android:icon="@drawable/ic_baseline_watch_later_24"-->
+        <!--            android:title="@string/Watch" />-->
+        <!--        <item-->
+        <!--            android:id="@+id/setting"-->
+        <!--            android:icon="@drawable/ic_baseline_settings_24"-->
+        <!--            android:title="@string/setting" />-->
     </group>
-    <item android:title="profile">
-        <menu>
-            <group android:checkableBehavior="single">
 
+
+            <group android:id="@+id/menu_bottom"
+                android:checkableBehavior="none">
+                <item
+                    android:id="@+id/darkmode"
+                    android:icon="@drawable/baseline_brightness_6_24"
+                    android:title="Dark Mode" />
                 <item
                     android:id="@+id/logout"
                     android:title="logout" />
-<!--                <item-->
-<!--                    android:id="@+id/profile"-->
-<!--                    android:icon="@drawable/ic_baseline_edit_24"-->
-<!--                    android:title="@string/editprofilec" />-->
-<!--                <item-->
-<!--                    android:id="@+id/rate"-->
-<!--                    android:icon="@drawable/ic_baseline_star_rate_24"-->
-<!--                    android:title="@string/rate" />-->
+                <!--                <item-->
+                <!--                    android:id="@+id/profile"-->
+                <!--                    android:icon="@drawable/ic_baseline_edit_24"-->
+                <!--                    android:title="@string/editprofilec" />-->
+                <!--                <item-->
+                <!--                    android:id="@+id/rate"-->
+                <!--                    android:icon="@drawable/ic_baseline_star_rate_24"-->
+                <!--                    android:title="@string/rate" />-->
 
             </group>
-        </menu>
-    </item>
+
 </menu>

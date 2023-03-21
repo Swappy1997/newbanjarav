@@ -4,4 +4,12 @@
     <string name="key">AIzaSyDZ6U15FkCeMH-YlkHjZQX_XnyV9Su85GI</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="touch">Touch ID / Passcode</string>
+    <string-array name="Profile_created">
+        <item>Myself</item>
+        <item>Son</item>
+        <item>Daughter</item>
+        <item>Friend</item>
+        <item>Relative</item>
+    </string-array>
 </resources>

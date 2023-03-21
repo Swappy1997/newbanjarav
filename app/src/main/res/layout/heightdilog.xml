@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/txtTargetMsgHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary6"
+        android:gravity="center"
+        android:padding="12sp"
+        android:text="Height"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <NumberPicker
+        android:id="@+id/numberPicker1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/numberPicker1"
+        android:textSize="16sp"
+        android:id="@+id/text1"
+        android:layout_centerInParent="true"
+        android:text="cm"/>
+
+    <NumberPicker
+        android:id="@+id/numberPicker2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerInParent="true"
+         android:visibility="gone"
+        android:layout_toEndOf="@+id/text1" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/numberPicker2"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:id="@+id/text2"
+        android:layout_centerInParent="true"
+        android:text="ft"/>
+</RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/cm"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/circlebackground"
+            android:gravity="center"
+            android:elevation="1dp"
+            android:text="cm"
+            android:textColor="@color/black"
+            android:padding="8dp"
+            />
+
+        <TextView
+            android:id="@+id/ft"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="ft"
+            android:background="@drawable/circlebackground"
+            android:elevation="1dp"
+            android:padding="8dp"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:src="@drawable/googlelogo" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/btnTsCancel"
+            style="@style/AppTheme.StandardButtonSecondary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5sp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="cancel"
+            android:textColor="@color/primary5"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnok"
+            style="@style/AppTheme.StandardButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5sp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Ok"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</LinearLayout>

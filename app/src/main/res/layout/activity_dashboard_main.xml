@@ -5,6 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:fitsSystemWindows="true">
 
     <RelativeLayout
@@ -15,6 +16,14 @@
             layout="@layout/acivity_bar_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottomnav"
+            android:layout_alignParentBottom="true"
+            app:menu="@menu/bottomnamemenu"
+            android:background="@color/white"/>
 
     </RelativeLayout>
 
@@ -28,7 +37,24 @@
         android:theme="@style/nav"
         app:headerLayout="@layout/mainu_header"
         app:itemTextColor="@color/black"
-        app:menu="@menu/main_menu" />
+        app:menu="@menu/main_menu" >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="2dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/logoicon" />
+
+        </RelativeLayout>
+    </com.google.android.material.navigation.NavigationView>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

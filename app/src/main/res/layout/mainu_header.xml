@@ -5,20 +5,23 @@
     android:background="@color/white">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/image_view"
+        android:id="@+id/circleimage"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:layout_marginTop="16dp"
         android:src="@drawable/googlelogo" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/image_view"
+        android:layout_below="@+id/circleimage"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="4dp"
         android:fontFamily="cursive"
-        android:text="@string/app_name"
+        android:id="@+id/headername"
+        android:textStyle="bold"
+        android:text="Hello Swapnil"
         android:textSize="20sp" />
 </RelativeLayout>

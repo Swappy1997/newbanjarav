@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.BanjaraVivah" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/primary6</item>
-        <item name="colorPrimaryVariant">@color/primary5</item>
+        <item name="colorPrimary">@color/primary5</item>
+        <item name="colorPrimaryVariant">@color/primary6</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

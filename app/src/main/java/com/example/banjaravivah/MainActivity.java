@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //demo
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         phone = findViewById(R.id.phone);
         progressBar = findViewById(R.id.progress);
         sendOtp = findViewById(R.id.sendOtp);
@@ -85,14 +84,10 @@ public class MainActivity extends AppCompatActivity {
         if (firebaseUser != null) {
             // When user already sign in redirect to profile activity
             startActivity(new Intent(MainActivity.this, DashboardMainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            finish();
         }
-
-
         setSendOtp();
-
-
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -121,7 +116,10 @@ public class MainActivity extends AppCompatActivity {
                                 // Check condition
                                 if (task.isSuccessful()) {
                                     // When task is successful redirect to profile activity display Toast
-                                    startActivity(new Intent(MainActivity.this, DashboardMainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
+                                    Intent intent = new Intent(MainActivity.this, DashboardMainActivity.class);
+                                    startActivity(intent);
+                                    finish();
                                     displayToast("Firebase authentication successful");
                                 } else {
                                     // When task is unsuccessful display Toast
@@ -142,7 +140,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setSendOtp() {
-
         sendOtp.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("CheckResult")
             @Override
@@ -188,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("mobile", phone.getText().toString());
             intent.putExtra("otp", s);
             startActivity(intent);
+            finish();
         }
 
         @Override

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:title="Home"
+    android:icon="@drawable/baseline_home_24"
+    android:id="@+id/dashboard"/>
+    <item
+        android:title="Education"
+        android:icon="@drawable/baseline_menu_book_24"
+        android:id="@+id/education"/>
+    <item
+        android:title="Profession"
+        android:icon="@drawable/ic_baseline_work_outline_24"
+        android:id="@+id/profession"/>
+    <item
+        android:title="Location"
+        android:icon="@drawable/ic_baseline_location_on_24"
+        android:id="@+id/location"/>
+    <item
+        android:title="Other"
+        android:icon="@drawable/ic_baseline_cloud_done_24"
+        android:id="@+id/other"/>
+</menu>
