@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/txtTargetMsgHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary6"
+        android:gravity="center"
+        android:padding="12sp"
+        android:textAllCaps="true"
+        android:text="Serach Occupation"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+    <androidx.appcompat.widget.SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/black_border"
+        android:layout_margin="8dp"
+        app:iconifiedByDefault="false"
+        android:id="@+id/jobsearch"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/job_listview"/>
+    </LinearLayout>
+

@@ -4,253 +4,506 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="none"
     android:background="@color/white"
+    android:scrollbars="none"
     tools:context=".activity.RegistrationActivity">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@color/primary6">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:layout_alignParentEnd="true"
-            android:text="Already a member? Login"
-            android:textColor="@color/white" />
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:padding="16dp"
-            android:text="User Registration"
-            android:textColor="@color/white"
-            android:textSize="24sp" />
-
-    </RelativeLayout>
-    <LinearLayout
-        android:id="@+id/layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:background="@drawable/roundercorner"
-        android:gravity="center_horizontal">
-
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/logonoback" />
-    </LinearLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layout"
-        android:layout_margin="16dp"
-        android:padding="16dp">
-
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="Profile created by "
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-        <Spinner
-            android:id="@+id/prfileCreatedFor"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            style="@style/SpinnerTheme"
-            android:layout_below="@id/text"
-            />
-        <TextView
-            android:id="@+id/text2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="What is your first name ?"
-            android:layout_below="@+id/prfileCreatedFor"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:layout_height="150dp"
+            android:background="@color/primary6">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layout1"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/text2"
-            android:layout_centerHorizontal="true"
-            android:backgroundTint="@color/white"
-            android:hint="enter first name"
-            app:boxStrokeColor="@color/primary5"
-            app:boxStrokeWidthFocused="2dp"
-            app:hintTextColor="@color/primary5"
-          >
-
-            <EditText
-                android:id="@+id/firstname"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                 />
-        </com.google.android.material.textfield.TextInputLayout>
-        <TextView
-            android:id="@+id/text3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="What is your last name ?"
-            android:layout_below="@+id/layout1"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layout2"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/text3"
-            android:layout_centerHorizontal="true"
-            android:backgroundTint="@color/white"
-            android:hint="enter last name"
-            app:boxStrokeColor="@color/primary5"
-            app:boxStrokeWidthFocused="2dp"
-            app:hintTextColor="@color/primary5"
-            >
-
-            <EditText
-                android:id="@+id/lastname"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/text4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            android:text="Where are you from ? "
-            android:layout_below="@+id/layout2"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/statetext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="State"
-            android:layout_below="@+id/text4"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-        <Spinner
-            android:id="@+id/statespinner"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            style="@style/SpinnerTheme"
-            android:layout_below="@id/statetext"
-            />
-        <TextView
-            android:id="@+id/citytext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="City"
-            android:layout_below="@+id/statespinner"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-        <Spinner
-            android:id="@+id/cityspinner"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            style="@style/SpinnerTheme"
-            android:layout_marginTop="8dp"
-            android:layout_below="@id/citytext"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Choose Gender"
-            android:id="@+id/text5"
-            android:layout_below="@id/cityspinner"
-            android:textColor="@color/black"
-            android:padding="8dp"
-            android:textSize="16sp" />
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_below="@+id/text5"
-            android:id="@+id/gender_radioBTN"
-            android:orientation="horizontal">
-
-            <RadioButton
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/primary6"
-                android:text="Male"
-                 />
+                android:layout_alignParentEnd="true"
+                android:padding="16dp"
+                android:text="Already a member? Login"
+                android:textColor="@color/white" />
 
-            <RadioButton
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/primary6"
-                android:text="Female"
-                />
-        </RadioGroup>
-        <TextView
-            android:id="@+id/text6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="Your age is "
-            android:layout_below="@+id/gender_radioBTN"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-        <TextView
-            android:id="@+id/age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:layout_toEndOf="@id/text6"
-            android:layout_below="@+id/gender_radioBTN"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+                android:layout_centerVertical="true"
+                android:padding="16dp"
+                android:text="User Registration"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
 
-        <DatePicker
-            android:id="@+id/datepicker"
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:calendarViewShown="false"
-            android:layout_below="@id/text6"
-            android:datePickerMode="spinner"
-            android:outlineSpotShadowColor="@color/black"
-            android:spinnersShown="true" />
-        <TextView
-            android:id="@+id/text7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="What is your height ?"
-            android:layout_below="@+id/datepicker"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-        <EditText
+            android:layout_marginTop="130dp"
+            android:background="@drawable/roundercorner"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/logonoback" />
+        </LinearLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/heightbtn"
-            android:layout_below="@id/text7"
-            android:background="@drawable/black_border"/>
+            android:layout_below="@id/layout"
+            android:layout_margin="16dp"
+            android:padding="4dp">
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Profile created by "
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/prfileCreatedFor"
+                style="@style/SpinnerTheme"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/text" />
+
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/prfileCreatedFor"
+                android:padding="8dp"
+                android:text="What is your first name ?"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout1"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text2"
+                android:layout_centerHorizontal="true"
+                android:backgroundTint="@color/white"
+                android:hint="enter first name"
+                app:boxStrokeColor="@color/primary5"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="@color/primary5">
+
+                <EditText
+                    android:id="@+id/firstname"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout1"
+                android:padding="8dp"
+                android:text="What is your last name ?"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout2"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text3"
+                android:layout_centerHorizontal="true"
+                android:backgroundTint="@color/white"
+                android:hint="enter last name"
+                app:boxStrokeColor="@color/primary5"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="@color/primary5">
+
+                <EditText
+                    android:id="@+id/lastname"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/maritalstatustext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout2"
+                android:padding="8dp"
+                android:text="What is your marital status"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/maritalstatus_radioBTN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/maritalstatustext"
+                android:layout_gravity="center"
+
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/primary6"
+                    android:text="Single" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/primary6"
+                    android:text="Widower" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/primary6"
+                    android:text="Divorced" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/text4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/maritalstatus_radioBTN"
+                android:paddingTop="8dp"
+                android:text="Where are you from ? "
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/statetext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text4"
+                android:padding="8dp"
+                android:text="State"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/statespinner"
+                style="@style/SpinnerTheme"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/statetext" />
+
+            <TextView
+                android:id="@+id/citytext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/statespinner"
+                android:padding="8dp"
+                android:text="City"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/cityspinner"
+                style="@style/SpinnerTheme"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/citytext"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/text5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cityspinner"
+                android:padding="8dp"
+                android:text="Choose Gender"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/gender_radioBTN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text5"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/primary6"
+                    android:text="Male" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/primary6"
+                    android:text="Female" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/text6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/gender_radioBTN"
+                android:padding="8dp"
+                android:text="Your age is "
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/gender_radioBTN"
+                android:layout_toEndOf="@id/text6"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <DatePicker
+                android:id="@+id/datepicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text6"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:outlineSpotShadowColor="@color/black"
+                android:spinnersShown="true" />
+
+            <TextView
+                android:id="@+id/text7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/datepicker"
+                android:padding="8dp"
+                android:text="What is your height ?"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/heightbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text7"
+                android:background="@drawable/black_border"
+                android:focusable="false" />
+
+            <TextView
+                android:id="@+id/text8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/heightbtn"
+                android:paddingTop="8dp"
+                android:text="What is your education ? "
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/educationtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text8"
+                android:padding="8dp"
+                android:text="Education"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/eduactionspinner"
+                style="@style/SpinnerTheme"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/educationtext" />
+
+            <TextView
+                android:id="@+id/streamtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/eduactionspinner"
+                android:padding="8dp"
+                android:text="Stream"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/streamspinner"
+                style="@style/SpinnerTheme"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/streamtext"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/occupationtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/streamspinner"
+                android:padding="8dp"
+                android:text="what is your Occupation ?"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/occupationet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/black_border"
+                android:focusable="false"
+                android:layout_below="@id/occupationtext"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/employmenttext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/occupationet"
+                android:padding="8dp"
+                android:text="What is your employement Type ?"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/employmentspinner"
+                style="@style/SpinnerTheme"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/employmenttext"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/anualincometext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/employmentspinner"
+                android:padding="8dp"
+                android:text="What is your anual income ?"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/anualspinner"
+                style="@style/SpinnerTheme"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/anualincometext"
+                android:layout_marginTop="8dp" />
+            <TextView
+                android:id="@+id/text9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_below="@id/anualspinner"
+                android:text="Upload your Photo"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text9"
+                android:id="@+id/layout3"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
 
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/baseline_image_search_24" />
 
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/primary6"
+                        android:text="Select"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="Image 1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/baseline_image_search_24" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/primary6"
+                        android:text="Select"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="8dp"
+
+                        android:text="Image 2" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/baseline_image_search_24" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/primary6"
+                        android:text="Select"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="Image 3" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/register"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primary6"
+                android:layout_below="@id/layout3"
+                android:text="Register"
+                android:textColor="@color/white" />
+        </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
 
 
 </ScrollView>
