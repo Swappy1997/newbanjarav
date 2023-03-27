@@ -1,13 +1,16 @@
 package com.example.banjaravivah;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
-import com.example.banjaravivah.activity.DashboardMainActivity;
-import com.example.banjaravivah.activity.RegistrationActivity;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 
 import android.annotation.SuppressLint;
@@ -22,22 +25,14 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.banjaravivah.activity.VerifyOtp;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import es.dmoral.toasty.Toasty;
@@ -65,75 +60,78 @@ public class MainActivity extends AppCompatActivity {
         googleBtn = findViewById(R.id.google);
         mAuth = FirebaseAuth.getInstance();
 
+
         // variable for FirebaseAuth class
 
         // Initialize sign in options the client-id is copied form google-services.json file
-        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("355946790912-osc6kfnrbu6meknn5bckl5ekmn78gt97.apps.googleusercontent.com")
-                .requestEmail()
-                .build();
-
-        googleSignInClient = GoogleSignIn.getClient(MainActivity.this, googleSignInOptions);
-        googleBtn.setOnClickListener((View.OnClickListener) view -> {
-            // Initialize sign in intent
-            Intent intent = googleSignInClient.getSignInIntent();
-            // Start activity for result
-            startActivityForResult(intent, 100);
-        });
-        FirebaseUser firebaseUser = mAuth.getCurrentUser();
-        if (firebaseUser != null) {
-            // When user already sign in redirect to profile activity
-            startActivity(new Intent(MainActivity.this, DashboardMainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-            finish();
-        }
+//        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken("355946790912-osc6kfnrbu6meknn5bckl5ekmn78gt97.apps.googleusercontent.com")
+//                .requestEmail()
+//                .build();
+//
+//        googleSignInClient = GoogleSignIn.getClient(MainActivity.this, googleSignInOptions);
+//        googleBtn.setOnClickListener((View.OnClickListener) view -> {
+//            // Initialize sign in intent
+//            Intent intent = googleSignInClient.getSignInIntent();
+//            // Start activity for result
+//            startActivityForResult(intent, 100);
+//        });
+//        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+//        if (firebaseUser != null) {
+//            // When user already sign in redirect to profile activity
+//            startActivity(new Intent(MainActivity.this, DashboardMainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+//            finish();
+//        }
         setSendOtp();
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        // Check condition
-        if (requestCode == 100) {
-            // When request code is equal to 100 initialize task
-            Task<GoogleSignInAccount> signInAccountTask = GoogleSignIn.getSignedInAccountFromIntent(data);
-            // check condition
-            if (signInAccountTask.isSuccessful()) {
-                // When google sign in successful initialize string
-                String s = "Google sign in successful";
-                // Display Toast
-                displayToast(s);
-                // Initialize sign in account
-                try {
-                    // Initialize sign in account
-                    GoogleSignInAccount googleSignInAccount = signInAccountTask.getResult(ApiException.class);
-                    // Check condition
-                    if (googleSignInAccount != null) {
-                        // When sign in account is not equal to null initialize auth credential
-                        AuthCredential authCredential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
-                        // Check credential
-                        mAuth.signInWithCredential(authCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                // Check condition
-                                if (task.isSuccessful()) {
-                                    // When task is successful redirect to profile activity display Toast
 
-                                    Intent intent = new Intent(MainActivity.this, DashboardMainActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                    displayToast("Firebase authentication successful");
-                                } else {
-                                    // When task is unsuccessful display Toast
-                                    displayToast("Authentication Failed :" + task.getException().getMessage());
-                                }
-                            }
-                        });
-                    }
-                } catch (ApiException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        // Check condition
+//        if (requestCode == 100) {
+//            // When request code is equal to 100 initialize task
+//            Task<GoogleSignInAccount> signInAccountTask = GoogleSignIn.getSignedInAccountFromIntent(data);
+//            // check condition
+//            if (signInAccountTask.isSuccessful()) {
+//                // When google sign in successful initialize string
+//                String s = "Google sign in successful";
+//                // Display Toast
+//                displayToast(s);
+//                // Initialize sign in account
+//                try {
+//                    // Initialize sign in account
+//                    GoogleSignInAccount googleSignInAccount = signInAccountTask.getResult(ApiException.class);
+//                    // Check condition
+//                    if (googleSignInAccount != null) {
+//                        // When sign in account is not equal to null initialize auth credential
+//                        AuthCredential authCredential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
+//                        // Check credential
+//                        mAuth.signInWithCredential(authCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<AuthResult> task) {
+//                                // Check condition
+//                                if (task.isSuccessful()) {
+//                                    // When task is successful redirect to profile activity display Toast
+//
+//                                    Intent intent = new Intent(MainActivity.this, DashboardMainActivity.class);
+//                                    startActivity(intent);
+//                                    finish();
+//                                    displayToast("Firebase authentication successful");
+//                                } else {
+//                                    // When task is unsuccessful display Toast
+//                                    displayToast("Authentication Failed :" + task.getException().getMessage());
+//                                }
+//                            }
+//                        });
+//                    }
+//                } catch (ApiException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//    }
 
     private void displayToast(String s) {
         Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
@@ -148,7 +146,9 @@ public class MainActivity extends AppCompatActivity {
                     if (phone.getText().toString().length() == 10) {
                         progressBar.setVisibility(View.VISIBLE);
                         sendOtp.setVisibility(View.GONE);
-                        sendVerificationCode(phone.getText().toString());
+                        String mobile = phone.getText().toString();
+                        loginCheck(mobile);
+
                     } else {
                         Toasty.info(getApplicationContext(), "Enter 10 digit phone number", Toast.LENGTH_SHORT).show();
 
@@ -162,6 +162,33 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    private void loginCheck(String phone) {
+        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://banjaravivah.online/mydemo.php/login", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("TAG", "onResponse: " + response);
+                progressBar.setVisibility(View.GONE);
+                sendOtp.setVisibility(View.VISIBLE);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toasty.info(getApplicationContext(), "Please Register ", Toast.LENGTH_SHORT).show();
+
+            }
+        }) {
+
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hm = new HashMap<>();
+                hm.put("key_phone", phone);
+                return hm;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
 
     private void sendVerificationCode(String number) {
         // this method is used for getting
@@ -181,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
         public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
             super.onCodeSent(s, forceResendingToken);
 
-            Intent intent = new Intent(getApplicationContext(), DashboardMainActivity.class);
+            Intent intent = new Intent(MainActivity.this,VerifyOtp.class);
             intent.putExtra("mobile", phone.getText().toString());
             intent.putExtra("otp", s);
             startActivity(intent);

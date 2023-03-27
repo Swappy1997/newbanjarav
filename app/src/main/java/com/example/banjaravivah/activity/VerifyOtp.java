@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -48,6 +50,7 @@ public class VerifyOtp extends AppCompatActivity {
         pinView = findViewById(R.id.pinview);
         progressBar = findViewById(R.id.progressbar);
         timer = findViewById(R.id.timer);
+        setSharedPref();
 //        code = pinView.getEditableText().toString();
         new CountDownTimer(30000, 1000) { // adjust the milli seconds here
 
@@ -92,7 +95,9 @@ public class VerifyOtp extends AppCompatActivity {
                             progressBar.setVisibility(View.VISIBLE);
                             verifyBtn.setVisibility(View.GONE);
 
-                            Intent i = new Intent(VerifyOtp.this, RegistrationActivity.class);
+                            Intent i = new Intent(VerifyOtp.this, DashboardMainActivity.class);
+                            i.putExtra("phone", mobile);
+                            i.putExtra("gender", "Male");
                             startActivity(i);
                             finish();
                         } else {
@@ -102,5 +107,16 @@ public class VerifyOtp extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void setSharedPref() {
+
+        final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("Registered", true);
+        editor.putString("phone", mobile);
+        editor.putString("gender", "Male");
+
+        editor.apply();
     }
 }

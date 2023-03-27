@@ -5,7 +5,9 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 
 import com.example.banjaravivah.MainActivity;
@@ -42,7 +44,16 @@ public class FirstActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+                boolean Registered;
+                final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(FirstActivity.this);
+                Registered = sharedPref.getBoolean("Registered", false);
+
+                if (!Registered) {
+                    startActivity(new Intent(FirstActivity.this, MainActivity.class));
+                } else {
+                    startActivity(new Intent(FirstActivity.this, DashboardMainActivity.class));
+                }
                 finish();
             }
         });

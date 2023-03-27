@@ -15,6 +15,7 @@ dependencyResolutionManagement {
         jcenter()
         maven { url "https://jitpack.io" }
     }
+
 }
 rootProject.name = "BanjaraVivah"
 include ':app'

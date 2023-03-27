@@ -3,59 +3,48 @@ package com.example.banjaravivah.adapter;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.banjaravivah.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.banjaravivah.activity.DashboardMainActivity;
+import com.example.banjaravivah.helper.Allusers;
 
 import java.util.ArrayList;
 
-import es.dmoral.toasty.Toasty;
+import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.hanks.library.bang.SmallBangView;
 
 public class UserDataAdapter extends RecyclerView.Adapter<UserDataAdapter.MyViewHolder> {
     String[] names;
     Context context;
+    ArrayList<Allusers> userDetails;
     int lastPosition = -1;
 
-    public UserDataAdapter(Context context, String[] names) {
+    public UserDataAdapter(Context context, ArrayList<Allusers> userDetails) {
         this.context = context;
-        this.names = names;
+        this.userDetails = userDetails;
     }
 
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         SmallBangView imageview;
-       // ImageView imageView;
+        CircleImageView pp;
+        // ImageView imageView;
         TextView name;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 //            imageView = itemView.findViewById(R.id.image);
             name = itemView.findViewById(R.id.name);
-            imageview =itemView.findViewById(R.id.imageViewAnimation);
+            imageview = itemView.findViewById(R.id.imageViewAnimation);
+            pp = itemView.findViewById(R.id.pp);
 
         }
     }
@@ -72,7 +61,11 @@ public class UserDataAdapter extends RecyclerView.Adapter<UserDataAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull UserDataAdapter.MyViewHolder holder, int position) {
-        holder.name.setText(names[position]);
+        Allusers allusers = userDetails.get(position);
+        holder.name.setText(allusers.getFirst_name());
+        Glide.with(context).load("https://banjaravivah.online/images/"+allusers.getImage())
+                .into(holder.pp);
+
         setRecyclerViewAnimation(holder.itemView, position);
         //holder.imageView.setBackgroundResource(img[position]);
         holder.imageview.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +85,7 @@ public class UserDataAdapter extends RecyclerView.Adapter<UserDataAdapter.MyView
 
     @Override
     public int getItemCount() {
-        return names.length;
+        return userDetails.size();
     }
 
     private void setRecyclerViewAnimation(View view, int position) {
@@ -103,6 +96,7 @@ public class UserDataAdapter extends RecyclerView.Adapter<UserDataAdapter.MyView
             lastPosition = position;
         }
     }
+
     private void setLocationBtn() {
     }
 }

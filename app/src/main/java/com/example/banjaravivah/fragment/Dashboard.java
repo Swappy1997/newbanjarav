@@ -29,6 +29,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.banjaravivah.R;
 import com.example.banjaravivah.adapter.UserDataAdapter;
+import com.example.banjaravivah.helper.Allusers;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -59,13 +60,17 @@ public class Dashboard extends Fragment {
         view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         recyclerView = view.findViewById(R.id.listview);
         //locationBtn = view.findViewById(R.id.locationLayout);
-        names = new String[]{"Swapnil", "ddd", "ddddf", "fffff", "Swapnil", "ddd", "ddddf", "fffff", "Swapnil", "ddd", "ddddf", "fffff", "Swapnil", "ddd", "ddddf", "fffff", "Swapnil", "ddd", "ddddf", "fffff"};
         // int[] img = {R.drawable.ic_heart, R.drawable.googlelogo, R.drawable.baseline_email_24, R.drawable.ic_baseline_work_outline_24};
         //  ArrayList<String> arrayList=new ArrayList<>(names);
-        UserDataAdapter userDataAdapter = new UserDataAdapter(getContext(),names);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(userDataAdapter);
+
+        loadList();
+
+//        Bundle bundle = this.getArguments();
+//        if (bundle != null) {
+//            String phone = bundle.getString("phone");
+//            String gender = bundle.getString("phone");
+//        }
+
 
         // Initialize firebase auth
 //        firebaseAuth = FirebaseAuth.getInstance();
@@ -102,6 +107,13 @@ public class Dashboard extends Fragment {
        // setLocationBtn();
         return view;
 
+    }
+    public void loadList() {
+        ArrayList<Allusers> transactionList = (ArrayList<Allusers>)getArguments().getSerializable("alluserlist");
+        UserDataAdapter userDataAdapter = new UserDataAdapter(getContext(),transactionList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(userDataAdapter);
     }
 
     private void setLocationBtn() {

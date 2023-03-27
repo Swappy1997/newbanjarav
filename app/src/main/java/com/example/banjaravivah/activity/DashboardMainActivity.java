@@ -2,7 +2,6 @@ package com.example.banjaravivah.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -11,11 +10,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
@@ -41,8 +41,10 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.example.banjaravivah.MainActivity;
 import com.example.banjaravivah.R;
 import com.example.banjaravivah.fragment.Dashboard;
+import com.example.banjaravivah.helper.Allusers;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.navigation.NavigationView;
@@ -70,7 +72,8 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
     BottomNavigationView bottomNavigationView;
     int SELECT_PICTURE = 200;
     CircleImageView profile_img;
-    String image;
+    String image, phone_number, gender;
+    ArrayList<Allusers> allusersArrayList;
 
 
     @Override
@@ -83,6 +86,17 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
         View headerview = navigationView.getHeaderView(0);
         TextView name = headerview.findViewById(R.id.headername);
         name.setText("Hiii Swappy");
+        Intent intent = getIntent();
+        phone_number = intent.getStringExtra("phone");
+        gender = intent.getStringExtra("gender");
+        final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(DashboardMainActivity.this);
+
+        phone_number = sharedPref.getString("phone", "");
+        gender = sharedPref.getString("gender", "");
+
+        getUserData();
+
+        Log.d("TAG", "onCreate: " + phone_number + gender);
         profile_img = headerview.findViewById(R.id.circleimage);
         getImage();
         profile_img.setOnClickListener(new View.OnClickListener() {
@@ -95,10 +109,11 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
         frameLayout = findViewById(R.id.linearlayout);
         bottomNavigationView = findViewById(R.id.bottomnav);
         setNavigationView();
-        displayDashBoardFragment();
+        // displayDashBoardFragment();
         setBottomNavigationView();
     }
-    private void getImage(){
+
+    private void getImage() {
         RequestQueue requestQueue = Volley.newRequestQueue(DashboardMainActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://banjaravivah.online/mydemo.php/upimage", new Response.Listener<String>() {
             @Override
@@ -106,13 +121,13 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
 
                 // Toast.makeText(MainActivity.this, "" + response, Toast.LENGTH_SHORT).show();
                 try {
-                    JSONArray j=new JSONArray(response);
+                    JSONArray j = new JSONArray(response);
                     for (int i = 0; i < j.length(); i++) {
                         JSONObject responseObj = j.getJSONObject(i);
                         image = responseObj.getString("uri_iv");
                         Log.d("TAG", "citynamee" + image);
                     }
-                    Glide.with(DashboardMainActivity.this).load("https://banjaravivah.online/images/"+image)
+                    Glide.with(DashboardMainActivity.this).load("https://banjaravivah.online/images/" + image)
                             .into(profile_img);
 //                    imageView2.setImageURI(Uri.parse(image));
                 } catch (JSONException e) {
@@ -129,6 +144,7 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
 
         requestQueue.add(stringRequest);
     }
+
     void imageChooser() {
 
         Intent i = new Intent();
@@ -153,23 +169,24 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
 
                     // update the preview image in the layout
                     try {
-                        Bitmap bitmap= MediaStore.Images.Media.getBitmap(getContentResolver(),selectedImageUri);
-                        Log.d("TAG", "onActivityResult1: "+bitmap);
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
+                        Log.d("TAG", "onActivityResult1: " + bitmap);
 
 
                         profile_img.setImageBitmap(bitmap);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                  //  Glide.with(this).load(selectedImageUri).into(profile_img);
+                    //  Glide.with(this).load(selectedImageUri).into(profile_img);
 
-                   // profile_img.setImageURI(selectedImageUri);
-                    Log.d("TAG", "onActivityResult: "+selectedImageUri);
+                    // profile_img.setImageURI(selectedImageUri);
+                    Log.d("TAG", "onActivityResult: " + selectedImageUri);
                 }
             }
         }
     }
-    public String getStringImage(Bitmap bmp){
+
+    public String getStringImage(Bitmap bmp) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
@@ -177,9 +194,13 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
         return encodedImage;
     }
 
-    private void displayDashBoardFragment() {
+    private void displayDashBoardFragment(ArrayList<Allusers> allusersArrayList) {
+        Dashboard dashboard = new Dashboard();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.content_frame, new Dashboard()).addToBackStack(null);
+        fragmentTransaction.replace(R.id.content_frame, dashboard).addToBackStack(null);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("alluserlist", allusersArrayList);
+        dashboard.setArguments(bundle);
         fragmentTransaction.commitAllowingStateLoss();
     }
 
@@ -214,8 +235,8 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
                 if (id == R.id.dashboard) {
                     setLocation();
                     //  loadFragment(new DashboardFragment());
-                } else if (id == R.id.darkmode) {
-
+                } else if (id == R.id.logout) {
+                    logout();
                 }
 //                else if (id == R.id.profile) {
 //                    loadFragment(new EditProfiles());
@@ -257,6 +278,20 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
             }
         });
         animateNavigationDrawer();
+
+    }
+
+    private void logout() {
+        try {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(DashboardMainActivity.this);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.clear();
+            editor.apply();
+            Intent i = new Intent(DashboardMainActivity.this, FirstActivity.class);
+            startActivity(i);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -428,5 +463,52 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
         LinearLayout delete = bottomSheetDialog.findViewById(R.id.delete);
 
         bottomSheetDialog.show();
+    }
+
+    private void getUserData() {
+        allusersArrayList = new ArrayList<>();
+        RequestQueue requestQueue = Volley.newRequestQueue(DashboardMainActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://banjaravivah.online/mydemo.php/alluser", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                Toast.makeText(DashboardMainActivity.this, response, Toast.LENGTH_SHORT).show();
+                try {
+                    JSONArray j = new JSONArray(response);
+                    for (int i = 0; i < j.length(); i++) {
+                        JSONObject responseObj = j.getJSONObject(i);
+                        allusersArrayList.add(new Allusers(Integer.parseInt(responseObj.optString("user_id")), responseObj.getString("profile_created")
+                                , responseObj.getString("phone_number"), responseObj.getString("first_name"), responseObj.getString("last_name"), responseObj.getString("profie_pic"),
+                                responseObj.getString("gender"), responseObj.getString("marital_status"), responseObj.getString("education"), responseObj.getString("stream"),
+                                responseObj.getString("state"), responseObj.getString("city"), responseObj.getString("age"), responseObj.getString("employement_type"),
+                                responseObj.getString("anual_income"), responseObj.getString("height"), responseObj.getString("occupation"), responseObj.getString("father_name"),
+                                responseObj.getString("mother_name"), responseObj.getString("village_name"), responseObj.getString("no_sister")));
+
+
+                    }
+
+
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+                displayDashBoardFragment(allusersArrayList);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toasty.error(DashboardMainActivity.this, error.toString(), Toasty.LENGTH_SHORT).show();
+            }
+        }) {
+
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hm = new HashMap<>();
+                hm.put("key_phone", phone_number);
+                hm.put("key_gender", gender);
+
+                return hm;
+            }
+        };
+        requestQueue.add(stringRequest);
     }
 }
