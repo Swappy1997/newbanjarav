@@ -31,7 +31,7 @@ import es.dmoral.toasty.Toasty;
 
 public class VerifyOtp extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    String mobile, verificationId, code;
+    String mobile, verificationId, code,userid,gender,profilepic;
     PinView pinView;
     Button verifyBtn;
     ProgressBar progressBar;
@@ -47,6 +47,9 @@ public class VerifyOtp extends AppCompatActivity {
         verifyBtn = findViewById(R.id.verify);
         mobile = getIntent().getStringExtra("mobile");
         verificationId = getIntent().getStringExtra("otp");
+        userid = getIntent().getStringExtra("userid");
+        gender = getIntent().getStringExtra("gender");
+        profilepic = getIntent().getStringExtra("profilepic");
         pinView = findViewById(R.id.pinview);
         progressBar = findViewById(R.id.progressbar);
         timer = findViewById(R.id.timer);
@@ -97,7 +100,9 @@ public class VerifyOtp extends AppCompatActivity {
 
                             Intent i = new Intent(VerifyOtp.this, DashboardMainActivity.class);
                             i.putExtra("phone", mobile);
-                            i.putExtra("gender", "Male");
+                            i.putExtra("gender", gender);
+                            i.putExtra("userid", userid);
+                            i.putExtra("pic", profilepic);
                             startActivity(i);
                             finish();
                         } else {
@@ -115,7 +120,9 @@ public class VerifyOtp extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean("Registered", true);
         editor.putString("phone", mobile);
-        editor.putString("gender", "Male");
+        editor.putString("gender", gender);
+        editor.putString("userid", userid);
+        editor.putString("pic", profilepic);
 
         editor.apply();
     }

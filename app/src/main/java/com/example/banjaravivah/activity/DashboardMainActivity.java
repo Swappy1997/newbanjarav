@@ -72,7 +72,7 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
     BottomNavigationView bottomNavigationView;
     int SELECT_PICTURE = 200;
     CircleImageView profile_img;
-    String image, phone_number, gender;
+    String image, phone_number, gender, userid,pic;
     ArrayList<Allusers> allusersArrayList;
 
 
@@ -89,16 +89,21 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
         Intent intent = getIntent();
         phone_number = intent.getStringExtra("phone");
         gender = intent.getStringExtra("gender");
+        userid = intent.getStringExtra("userid");
+        pic = intent.getStringExtra("pic");
+
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(DashboardMainActivity.this);
 
         phone_number = sharedPref.getString("phone", "");
         gender = sharedPref.getString("gender", "");
+        userid = sharedPref.getString("userid", "");
+        pic = sharedPref.getString("pic", "");
 
         getUserData();
 
         Log.d("TAG", "onCreate: " + phone_number + gender);
         profile_img = headerview.findViewById(R.id.circleimage);
-        getImage();
+     //   getImage();
         profile_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,11 +127,10 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
                 // Toast.makeText(MainActivity.this, "" + response, Toast.LENGTH_SHORT).show();
                 try {
                     JSONArray j = new JSONArray(response);
-                    for (int i = 0; i < j.length(); i++) {
-                        JSONObject responseObj = j.getJSONObject(i);
-                        image = responseObj.getString("uri_iv");
-                        Log.d("TAG", "citynamee" + image);
-                    }
+                        JSONObject responseObj = j.getJSONObject(1);
+                        image = responseObj.getString("profie_pic");
+                        Log.d("TAG", "image" + image);
+
                     Glide.with(DashboardMainActivity.this).load("https://banjaravivah.online/images/" + image)
                             .into(profile_img);
 //                    imageView2.setImageURI(Uri.parse(image));
@@ -138,7 +142,13 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+            }
 
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hm = new HashMap<>();
+                hm.put("key_userid", userid);
+
+                return hm;
             }
         });
 
@@ -200,6 +210,7 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
         fragmentTransaction.replace(R.id.content_frame, dashboard).addToBackStack(null);
         Bundle bundle = new Bundle();
         bundle.putSerializable("alluserlist", allusersArrayList);
+        bundle.putInt("key",1);
         dashboard.setArguments(bundle);
         fragmentTransaction.commitAllowingStateLoss();
     }
@@ -287,7 +298,7 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
             SharedPreferences.Editor editor = preferences.edit();
             editor.clear();
             editor.apply();
-            Intent i = new Intent(DashboardMainActivity.this, FirstActivity.class);
+            Intent i = new Intent(DashboardMainActivity.this, MainActivity.class);
             startActivity(i);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -474,19 +485,25 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
 
                 Toast.makeText(DashboardMainActivity.this, response, Toast.LENGTH_SHORT).show();
                 try {
-                    JSONArray j = new JSONArray(response);
-                    for (int i = 0; i < j.length(); i++) {
-                        JSONObject responseObj = j.getJSONObject(i);
-                        allusersArrayList.add(new Allusers(Integer.parseInt(responseObj.optString("user_id")), responseObj.getString("profile_created")
-                                , responseObj.getString("phone_number"), responseObj.getString("first_name"), responseObj.getString("last_name"), responseObj.getString("profie_pic"),
-                                responseObj.getString("gender"), responseObj.getString("marital_status"), responseObj.getString("education"), responseObj.getString("stream"),
-                                responseObj.getString("state"), responseObj.getString("city"), responseObj.getString("age"), responseObj.getString("employement_type"),
-                                responseObj.getString("anual_income"), responseObj.getString("height"), responseObj.getString("occupation"), responseObj.getString("father_name"),
-                                responseObj.getString("mother_name"), responseObj.getString("village_name"), responseObj.getString("no_sister")));
+                    if (!response.isEmpty()) {
+                        JSONArray j = new JSONArray(response);
 
+                        for (int i = 0; i < j.length(); i++) {
+                            JSONObject responseObj = j.getJSONObject(i);
+
+
+                            allusersArrayList.add(new Allusers(Integer.parseInt(responseObj.optString("user_id")), responseObj.getString("profile_created")
+                                    , responseObj.getString("phone_number"), responseObj.getString("first_name"), responseObj.getString("last_name"), responseObj.getString("profie_pic"),
+                                    responseObj.getString("gender"), responseObj.getString("marital_status"), responseObj.getString("education"), responseObj.getString("stream"),
+                                    responseObj.getString("state"), responseObj.getString("city"), responseObj.getString("age"), responseObj.getString("employement_type"),
+                                    responseObj.getString("anual_income"), responseObj.getString("height"), responseObj.getString("occupation"), responseObj.getString("father_name"),
+                                    responseObj.getString("mother_name"), responseObj.getString("village_name"), responseObj.getString("no_sister")));
+
+        Glide.with(DashboardMainActivity.this).load("https://banjaravivah.online/images/" + pic)
+                .into(profile_img);
+                        }
 
                     }
-
 
                 } catch (JSONException e) {
                     throw new RuntimeException(e);

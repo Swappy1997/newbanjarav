@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -53,12 +54,14 @@ public class Dashboard extends Fragment {
     RelativeLayout locationBtn;
     JSONArray stateArray;
     String[] names;
+    ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         recyclerView = view.findViewById(R.id.listview);
+         progressBar = view.findViewById(R.id.dashboardpb);
         //locationBtn = view.findViewById(R.id.locationLayout);
         // int[] img = {R.drawable.ic_heart, R.drawable.googlelogo, R.drawable.baseline_email_24, R.drawable.ic_baseline_work_outline_24};
         //  ArrayList<String> arrayList=new ArrayList<>(names);
@@ -104,16 +107,25 @@ public class Dashboard extends Fragment {
 //                }
 //            });
 //        });
-       // setLocationBtn();
+        // setLocationBtn();
         return view;
 
     }
+
     public void loadList() {
-        ArrayList<Allusers> transactionList = (ArrayList<Allusers>)getArguments().getSerializable("alluserlist");
-        UserDataAdapter userDataAdapter = new UserDataAdapter(getContext(),transactionList);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(userDataAdapter);
+        ArrayList<Allusers> transactionList = (ArrayList<Allusers>) getArguments().getSerializable("alluserlist");
+        int key = getArguments().getInt("key");
+
+        if (key == 1) {
+            UserDataAdapter userDataAdapter = new UserDataAdapter(getContext(), transactionList);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+            recyclerView.setLayoutManager(linearLayoutManager);
+            recyclerView.setAdapter(userDataAdapter);
+            progressBar.setVisibility(View.GONE);
+        } else {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
     }
 
     private void setLocationBtn() {
@@ -176,6 +188,7 @@ public class Dashboard extends Fragment {
                                     e.printStackTrace();
                                 }
                             }
+
                             @Override
                             public void onNothingSelected(AdapterView<?> adapterView) {
                             }
@@ -186,7 +199,7 @@ public class Dashboard extends Fragment {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toasty.error(getContext(),error.toString(),Toasty.LENGTH_SHORT).show();
+                        Toasty.error(getContext(), error.toString(), Toasty.LENGTH_SHORT).show();
                     }
                 });
                 queue.add(jsonArrayRequest);
@@ -226,7 +239,7 @@ public class Dashboard extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toasty.error(getContext(),error.toString(),Toasty.LENGTH_SHORT).show();
+                Toasty.error(getContext(), error.toString(), Toasty.LENGTH_SHORT).show();
             }
         }) {
 

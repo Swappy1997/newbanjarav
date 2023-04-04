@@ -1,6 +1,8 @@
 package com.example.banjaravivah.helper;
 
-public class Allusers {
+import java.io.Serializable;
+
+public class Allusers implements Serializable {
 
 
     public Allusers(int user_id, String profile_created, String phone_number, String first_name, String last_name, String image, String gender, String marital_status, String education, String stream, String state, String city, String age, String jobtype, String anual_income, String height, String occupation, String father_name, String mother_name, String village_name, String no_sister) {
@@ -195,6 +197,6 @@ public class Allusers {
         this.user_id = user_id;
     }
 
-    String profile_created,phone_number,first_name,last_name,image,gender,marital_status,education,stream,state,city,age,jobtype,anual_income,height,occupation,father_name,mother_name,village_name,no_sister;
+    String profile_created, phone_number, first_name, last_name, image, gender, marital_status, education, stream, state, city, age, jobtype, anual_income, height, occupation, father_name, mother_name, village_name, no_sister;
     int user_id;
 }

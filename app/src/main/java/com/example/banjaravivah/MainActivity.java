@@ -31,6 +31,10 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -46,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     GoogleSignInClient googleSignInClient;
 
+    String userid, profie_pic, gender;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -169,9 +174,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Log.d("TAG", "onResponse: " + response);
-                progressBar.setVisibility(View.GONE);
-                sendOtp.setVisibility(View.VISIBLE);
+                if (response.startsWith("Phone Number not registerd Please Regiester")) {
+                    Toasty.info(getApplicationContext(), "Please Register ", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                    sendOtp.setVisibility(View.VISIBLE);
+                } else {
+                    progressBar.setVisibility(View.GONE);
+                    sendOtp.setVisibility(View.VISIBLE);
+                    sendVerificationCode(phone);
+                    try {
+                        JSONArray j = new JSONArray(response);
+                        for (int i = 0; i < j.length(); i++) {
+                            JSONObject responseObj = j.getJSONObject(i);
+                            userid = responseObj.getString("user_id");
+                            gender = responseObj.getString("gender");
+                            profie_pic = responseObj.getString("profie_pic");
+
+                        }
+
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                }
+
             }
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -208,9 +236,12 @@ public class MainActivity extends AppCompatActivity {
         public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
             super.onCodeSent(s, forceResendingToken);
 
-            Intent intent = new Intent(MainActivity.this,VerifyOtp.class);
+            Intent intent = new Intent(MainActivity.this, VerifyOtp.class);
             intent.putExtra("mobile", phone.getText().toString());
             intent.putExtra("otp", s);
+            intent.putExtra("userid", userid);
+            intent.putExtra("gender", gender);
+            intent.putExtra("profilepic", profie_pic);
             startActivity(intent);
             finish();
         }
