@@ -72,7 +72,7 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
     BottomNavigationView bottomNavigationView;
     int SELECT_PICTURE = 200;
     CircleImageView profile_img;
-    String image, phone_number, gender, userid,pic;
+    String image, phone_number, gender, userid, pic;
     ArrayList<Allusers> allusersArrayList;
 
 
@@ -103,7 +103,7 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
 
         Log.d("TAG", "onCreate: " + phone_number + gender);
         profile_img = headerview.findViewById(R.id.circleimage);
-     //   getImage();
+        //   getImage();
         profile_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,9 +127,9 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
                 // Toast.makeText(MainActivity.this, "" + response, Toast.LENGTH_SHORT).show();
                 try {
                     JSONArray j = new JSONArray(response);
-                        JSONObject responseObj = j.getJSONObject(1);
-                        image = responseObj.getString("profie_pic");
-                        Log.d("TAG", "image" + image);
+                    JSONObject responseObj = j.getJSONObject(1);
+                    image = responseObj.getString("profie_pic");
+                    Log.d("TAG", "image" + image);
 
                     Glide.with(DashboardMainActivity.this).load("https://banjaravivah.online/images/" + image)
                             .into(profile_img);
@@ -210,7 +210,7 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
         fragmentTransaction.replace(R.id.content_frame, dashboard).addToBackStack(null);
         Bundle bundle = new Bundle();
         bundle.putSerializable("alluserlist", allusersArrayList);
-        bundle.putInt("key",1);
+        bundle.putInt("key", 1);
         dashboard.setArguments(bundle);
         fragmentTransaction.commitAllowingStateLoss();
     }
@@ -499,8 +499,8 @@ public class DashboardMainActivity extends AppCompatActivity implements Navigati
                                     responseObj.getString("anual_income"), responseObj.getString("height"), responseObj.getString("occupation"), responseObj.getString("father_name"),
                                     responseObj.getString("mother_name"), responseObj.getString("village_name"), responseObj.getString("no_sister")));
 
-        Glide.with(DashboardMainActivity.this).load("https://banjaravivah.online/images/" + pic)
-                .into(profile_img);
+                            Glide.with(DashboardMainActivity.this).load("https://banjaravivah.online/images/" + pic)
+                                    .into(profile_img);
                         }
 
                     }
